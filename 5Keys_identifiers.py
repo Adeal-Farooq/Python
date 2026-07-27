@@ -21,9 +21,9 @@ _1ade = 'adea;l'
 adeal12__ = 'adeal'
 
 #incorrect identifier 
-2 = 'adeal'
-@ = 'adeal'
--adeal = 'name'
-1name = 'adeal'
-False = 'adeal'
+#2 = 'adeal'
+#@ = 'adeal'
+#-adeal = 'name'
+#1name = 'adeal'
+#False = 'adeal'
 

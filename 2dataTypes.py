@@ -1,6 +1,6 @@
 #BASIC TYPES ---integer ,complex bolean and string
 
-#CONTAINER TYPES ---- lists , tuples , dets, and dictionary
+#CONTAINER TYPES ---- lists , tuples , sets, and dictionary
 
 #USER DEFINED TYPES ----Class
 

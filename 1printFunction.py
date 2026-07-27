@@ -21,4 +21,5 @@ print("world") # these teo print functionds will be printed in same line as end 
 
 
 print("hello", end = "-")
-print("world") #here end parameter id defimned by - 
+print("world") #here end parameter is defimned by - 
+
