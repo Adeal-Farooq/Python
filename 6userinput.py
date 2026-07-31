@@ -20,6 +20,7 @@ print(result)
 #so we use TYPE CONVERSION to change the input type so that we can easily operate on them 
 
 #we can check the datatype of thing by type()
+
 type(3)
 type('adeal')
 type (True)
