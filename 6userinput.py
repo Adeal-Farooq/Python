@@ -19,7 +19,7 @@ print(result)
 #so we got that whatever input we send by the user will be send as string to the programmer
 #so we use TYPE CONVERSION to change the input type so that we can easily operate on them 
 
-#we can check the datatype of thing by type()
+#we can check the datatype of thing by type() function
 
 type(3)
 type('adeal')
