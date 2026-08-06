@@ -65,7 +65,7 @@ print(c)
 #in python we can't use a++ or a-- we have to use like a += 1 or a -= 1
 
 
-
+print("identity Operator")
 #6.	Identity Operators
 #it is used to if two variables are present at the same memory location or not 
 d = 4
@@ -74,7 +74,8 @@ print(d is e)
 
 f = "Hello"
 g = "Hello"
-print( f is g)
+print(f is g)
+print(f is not g)
 
 h = [1,2,3]
 i = [1,2,3]
