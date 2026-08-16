@@ -36,6 +36,6 @@ for i in {1,3 ,5 ,6}:
   print(i)
 
 
-#to b yeh smj aaya ki aap for loop k andr koi b range yaan sequence provide karo , for loop us pe iterate karta jayega ,, aur output deta jayega
+#to ab yeh smj aaya ki aap for loop k andr koi b range yaan sequence provide karo , for loop us pe iterate karta jayega ,, aur output deta jayega
 
 
