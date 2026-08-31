@@ -96,11 +96,9 @@ In Python, a variable is just a name you give to a piece of data so you can use 
 
 Imagine you have VS Code open, you create a file named app.py, and you type these exact two lines:
 
-Python
+`score = 100
 
-==**score = 100**==
-
-==player_name = "Adeal"==
+`player_name = "Adeal"`
 
 If you read this as a human, you say: "Okay, the score is 100, and the player's name is Adeal."
 
@@ -130,19 +128,19 @@ Because variables are just name tags, we can do some interesting things that oft
 
 Let's add two more lines to our code:
 
-Python
+```
+`score = 100
 
-score = 100
+`player_name = "Adeal"
 
-player_name = "Adeal"
-
+```
 # Let's create a new variable and set it equal to score
 
-final_score = score
+`final_score = score
 
 # Now let's change the original score
 
-score = 50
+`score = 50
 
 **Question:** What is the value of final_score right now? Is it 100 or 50?
 
@@ -225,11 +223,10 @@ Let's break them down.
 Numbers (Integers, Floats), Strings (text), and Booleans (True/False) are immutable. Once Python builds them in the Heap, they can **never** be changed.
 
 Let's look at this code:
-
-Python
-
-x = 10
-x = x + 1
+```
+`x = 10`
+`x = x + 1`
+```
 
 A beginner thinks: "The computer found the 10 box and changed it to an 11."
 
@@ -251,12 +248,12 @@ Lists (Arrays), Dictionaries (Hash Maps), and Sets are mutable. You can change t
 
 Let's look at a **List** (an ordered collection of items, written in square brackets []).
 
-Python
+```
+`my_list = [1, 2, 3]`
 
-my_list = [1, 2, 3]
+`my_list.append(4) # This means "add 4 to the end of the list"`
 
-my_list.append(4) # This means "add 4 to the end of the list"
-
+```
 Here is what happens in memory:
 
 1. Python builds a List object [1, 2, 3] in the Heap. The my_list name tag points to it.
@@ -267,15 +264,15 @@ Here is what happens in memory:
 
 Now that you understand mutability, here is the interview trap. Read this code carefully and think about what will print to the screen:
 
-Python
+```
+`list_A = [100, 200, 300]`
 
-list_A = [100, 200, 300]
+`list_B = list_A`
 
-list_B = list_A
+`list_B.append(400)`
 
-list_B.append(400)
-
-print(list_A)
+`print(list_A)`
+```
 
 A junior developer will say: "It prints [100, 200, 300]. We only added the 400 to list_B, not list_A."
 
@@ -301,14 +298,14 @@ There are two ways to do this, and you need to understand both because the first
 
 For a simple, flat list, you can use Python's built-in .copy() method.
 
-Python
+```
+`list_A = [100, 200, 300]
 
-list_A = [100, 200, 300]
+`list_B = list_A.copy()  # Forces a new object in the Heap
 
-list_B = list_A.copy()  # Forces a new object in the Heap
+`list_B.append(400)`
 
-list_B.append(400)
-
+```
 **What happens in memory:**
 
 1. Python looks at list_A, goes to the Heap, and creates a **brand new list shell**.
@@ -324,17 +321,17 @@ In Machine Learning, your data is rarely just a flat list of numbers. You often 
 
 Look at this code carefully:
 
-Python
-
-matrix_A = [[1, 2], [3, 4]]
+`matrix_A = [[1, 2], [3, 4]]
 
 matrix_B = matrix_A.copy() # We used the safe method, right?
 
 # Let's change the first number in the first inner list
+```
 
-matrix_B[0][0] = 99
+`matrix_B[0][0] = 99`
 
-print(matrix_A)
+`print(matrix_A)`
+```
 
 You might expect matrix_A to remain [[1, 2], [3, 4]] because we used .copy(). **But it will actually print [[99, 2], [3, 4]].** Our original data was corrupted!
 
@@ -352,19 +349,19 @@ _Shallow Copy vs. Deep Copy in Memory. Source: Medium_
 
 When you have nested data (lists inside lists, dictionaries inside lists), you must use a tool from Python's standard library called deepcopy.
 
-Python
+```
+`import copy # We have to bring in this tool`
 
-import copy # We have to bring in this tool
+`matrix_A = [[1, 2], [3, 4]]`
 
-matrix_A = [[1, 2], [3, 4]]
+`matrix_B = copy.deepcopy(matrix_A)`
 
-matrix_B = copy.deepcopy(matrix_A)
+`matrix_B[0][0] = 99`
 
-matrix_B[0][0] = 99
-
+```
 **What deepcopy does in memory:** It acts like a recursive scanner. It creates a new outer list. Then it looks inside. If it sees another list, it builds a new one of those, too. It goes all the way down to the bottom, ensuring that absolutely no memory addresses are shared between the old object and the new object.
 
-Because .copy() is a Shallow Copy. It only creates a new shell for the outermost list. If there are other mutable objects (like inner lists) tucked inside, it just copies their memory addresses, not the objects themselves.
+==Because .copy() is a Shallow Copy. It only creates a new shell for the outermost list. If there are other mutable objects (like inner lists) tucked inside, it just copies their memory addresses, not the objects themselves.==
 
 What deepcopy does in memory:
 
@@ -421,3 +418,4 @@ Think of deepcopy as an incredibly thorough contractor. You tell the contractor,
 
 - **Shallow Copy (.copy()):** Buys a new notebook, but just copies the old addresses. They share the inner lists.
 - **Deep Copy (deepcopy):** Buys a new notebook AND builds brand new inner lists. Complete separation.
+
