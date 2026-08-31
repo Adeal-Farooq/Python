@@ -419,3 +419,32 @@ Think of deepcopy as an incredibly thorough contractor. You tell the contractor,
 - **Shallow Copy (.copy()):** Buys a new notebook, but just copies the old addresses. They share the inner lists.
 - **Deep Copy (deepcopy):** Buys a new notebook AND builds brand new inner lists. Complete separation.
 
+# **Summary** 
+
+### **1. The Two Worlds of Memory (Stack & Heap)**
+
+- **Variables are NOT boxes:** They are **name tags** (pointers).
+- **The Stack:** The fast, highly organized memory where Python keeps your variables (the name tags).
+- **The Heap:** The massive, messy warehouse memory where the actual data objects (the numbers, text, lists, and ML models) live.
+- _The Mechanic:_ A variable in the Stack simply shoots an invisible arrow (a memory address) to point at an object in the Heap.
+
+### **2. The Clean-Up Crew (Garbage Collection)**
+
+- **Reference Counting:** Every object in the Heap has a hidden scoreboard tracking how many name tags are currently pointing at it.
+- **The Sweep:** The exact millisecond an object's score hits **0** (meaning no variables point to it anymore), Python's Garbage Collector destroys it to free up your computer's RAM.
+
+### **3. The Rules of Change (Mutability)**
+
+Everything in the Heap is born with one of two strict rules:
+
+- **Immutable (Frozen):** Numbers, Strings, and Booleans. You cannot change them in memory. If you add 1 to a number, Python builds a _brand new object_ in the Heap and moves the name tag to it.
+- **Mutable (Flexible):** Lists and Dictionaries. You can open them up and change their insides directly in the Heap without moving the name tag.
+
+### **4. The Cloning Trap (Copying Data)**
+
+Because variables just point to objects, saying list_B = list_A just points two name tags at the exact same object. To actually duplicate data, we have two tools:
+
+- **Shallow Copy (.copy()):** Buys a new Notebook (outer list), but just copies the same Addresses (inner lists). If you change an inner list, it changes both!
+- **Deep Copy (copy.deepcopy()):** Buys a new Notebook AND builds brand new Houses (inner lists). It creates a 100% independent, safe clone of your data.
+
+You now possess the mental model of how Python actually operates under the hood.
