@@ -70,7 +70,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:#NAME",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -203,7 +203,7 @@
       "bases:Create new base": false
     }
   },
-  "active": "393c6cc22bd16071",
+  "active": "fdab53e79c91bfb8",
   "lastOpenFiles": [
     "Python.md",
     "Python Extra Notes.md",
