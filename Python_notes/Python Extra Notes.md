@@ -448,3 +448,86 @@ Because variables just point to objects, saying list_B = list_A just points two 
 - **Deep Copy (copy.deepcopy()):** Buys a new Notebook AND builds brand new Houses (inner lists). It creates a 100% independent, safe clone of your data.
 
 You now possess the mental model of how Python actually operates under the hood.
+
+
+
+# **The id() Function**
+
+Today, we are going to learn how to act like a memory detective. We will learn the **id() function** and one of the most common trick questions asked in junior FAANG interviews: **The difference between == and is.**
+
+**1. The id() Function: Uncovering the Truth**
+
+In Python, you can actually ask the computer, _"Hey, what is the exact physical address of this object in the Heap?"_
+
+You do this using a built-in tool called id(). When you wrap a variable in id(), Python spits out a long number, which represents its actual location in your computer's RAM.
+
+Look at this code:
+
+```
+score = 100
+
+final_score = score
+
+new_score = 100
+
+print(id(score))
+
+print(id(final_score))
+
+print(id(new_score))
+```
+
+If you run this on your laptop, the computer will print out something that looks like this: 140733055400848 140733055400848 140733055400848
+
+Notice how they are all the exact same number! Because 100 is an Immutable Integer, Python is smart. It says, _"Why build three different '100' objects and waste memory? I'll just build one '100' in the Heap, and point all three name tags to the exact same address."_
+
+**2. The FAANG Interview Trick: == vs is**
+
+Now that you know how memory works, you are ready for a classic interview trap.
+
+In Python, there are two different ways to ask if things are "equal", and they mean completely different things.
+
+**The == Operator (Value Equality)**
+
+Using == is like asking: **"Do these houses look identical on the inside?"** It only checks the _value_ of the data. It does not care where the data lives.
+
+**The #is Operator (Identity Equality)**
+
+Using is is like asking: **"Are these the exact same physical house?"** It checks the _memory address_ (the id()). If they don't live at the exact same address in the Heap, it returns False.
+
+**Let's see the trap in action:**
+
+We are going to create two identical lists. Remember, lists are Mutable, so Python is forced to build two separate objects in the Heap.
+```
+
+list_A = [1, 2, 3]
+
+list_B = [1, 2, 3]
+
+list_C = list_A       # We point list_C to list_A's memory
+```
+## Test 1: Do they look the same?
+
+print(list_A == list_B) 
+
+### Result: True (They both contain 1, 2, 3)
+
+## Test 2: Are they the exact same physical object in memory?
+
+print(list_A is list_B) 
+
+## Result: False (They live at different addresses in the Heap)
+
+# Test 3: What about list_C?
+
+print(list_A is list_C) 
+
+# Result: True (list_C is just a name tag pointing to list_A's address)
+
+Many beginners use is when they should use ==, and it causes their code to randomly break because they don't understand the difference between _values_ and _memory addresses_. You now know the difference.
+
+**Your Next Big Step**
+
+We have successfully covered the absolute core mechanics of Python memory. You now know more about how Python handles data than most people who have been coding for six months.
+
+To actually build things (like Machine Learning models or cloud backends), we need to start putting data into these memory spaces and making decisions with it.
