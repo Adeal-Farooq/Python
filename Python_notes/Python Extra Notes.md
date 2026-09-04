@@ -839,3 +839,83 @@ print(f"In 10 years, you will be {future_age} years old.")
 5. The old String "21" is left orphaned, and the Garbage Collector instantly destroys it.
 
 You now have a program that can ask questions, store the answers perfectly in memory, transform data types, calculate results, and print them back out.
+
+
+## **If I use int(input()), what happens if a user types the word 'twenty' instead of the number 20? How do we stop the program from crashing?**
+
+If a user types the word "twenty", the int() machine looks at the first letter, realizes it is not a base-10 digit (0-9), and immediately throws a **ValueError**.
+
+When an error like this is thrown, the Execution Thread violently stops, prints a massive red error message to the screen, and the entire program dies. If this was a cloud server, your app would go offline.
+
+To prevent this, we use a concept called **Exception Handling**. We build a safety net around dangerous code using a **try** and **except** block.
+
+**The Try-Except Block (The Safety Net)**
+
+Here is how you write it:
+
+Python
+
+try:
+
+    user_age = int(input("Enter your age: "))
+
+    future_age = user_age + 10
+
+    print(f"In 10 years, you will be {future_age} years old.")
+
+except ValueError:
+
+    print("Error: Please type a real number, not a word.")
+
+**What happens to the Execution Thread?**
+
+1. **The Safe Zone (try):** Python enters the try block. It knows to be on high alert.
+2. **The Bomb:** The user types "twenty". The input() function creates the string "twenty". The int() function tries to convert it and fails.
+3. **The Teleportation:** The millisecond the int() machine throws the ValueError, the Execution Thread **instantly stops**. It does _not_ move to the future_age line. Instead, it teleports completely out of the try block.
+4. **The Catcher (except):** Python scans the except blocks looking for a catcher that matches the error. It sees except ValueError:, so it jumps inside that block, prints your friendly error message, and the program survives without crashing.
+
+**The FAANG Standard: Don't use a "Naked Except"**
+
+A junior developer will often just write except: without specifying the error name (ValueError).
+
+**Never do this.** This is called a "naked except" or a "catch-all". If you do this, it will catch _every single error_—even if you accidentally made a typo in your code (like spelling it futur_age). It will silently hide your typos behind the "Please type a real number" message, and you will spend days trying to hunt down a bug you can't see.
+
+Always catch the _exact_ error you are anticipating (ValueError).
+
+**Building a Production-Ready Input (The Infinite Loop)**
+
+Right now, if the user types "twenty", our program prints the error, but then it just ends. A real application should give them another chance.
+
+We can combine our new try/except knowledge with the while loop we talked about earlier to create an unbreakable input request.
+
+We use a while True loop (which runs forever) and a new command called **break** (which destroys the loop from the inside).
+
+Python
+
+while True:
+
+    try:
+
+        # 1. We ask the user for their age
+
+        user_age = int(input("Enter your age: "))
+
+        # 2. If the line above works perfectly, we break the infinite loop!
+
+        break
+
+    except ValueError:
+
+        # 3. If they type a word, the thread teleports here, skipping the 'break'.
+
+        # The loop repeats and asks them again!
+
+        print("Invalid input. Please type a number using digits (e.g., 20).")
+
+# 4. We only reach this code once the loop is broken.
+
+future_age = user_age + 10
+
+print(f"Success! In 10 years, you will be {future_age} years old.")
+
+**Why this is FAANG-level code:** You have built a self-healing system. It anticipates human stupidity, catches the failure before it crashes the machine, provides clear feedback, and forces the system into a stable state before allowing the rest of the program to execute.
